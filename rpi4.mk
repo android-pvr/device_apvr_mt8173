@@ -27,9 +27,10 @@ PRODUCT_MODEL := Raspberry Pi 4
 include frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.drm.mode.force=1280x720 \
-    gralloc.drm.kms=/dev/dri/card0 \
+    debug.drm.mode.force=1366x768 \
+    gralloc.drm.kms=/dev/dri/card1 \
     ro.opengles.version=131072 \
+    ro.hardware.vulkan=powervr_mesa \
     ro.hardware.egl=swiftshader
 
 # application packages
@@ -50,6 +51,14 @@ PRODUCT_PACKAGES += \
 
 # graphics hal
 PRODUCT_PACKAGES += \
+    vulkan.powervr_mesa \
+    libpowervr_rogue \
+    libEGL_mesa \
+    libGLESv1_CM_mesa \
+    libGLESv2_mesa \
+    libEGL_angle \
+    libGLESv1_CM_angle \
+    libGLESv2_angle \
     libEGL_swiftshader \
     libGLESv1_CM_swiftshader \
     libGLESv2_swiftshader
@@ -79,6 +88,8 @@ PRODUCT_PACKAGES += \
 
 # system configurations
 PRODUCT_COPY_FILES := \
+    frameworks/native/data/etc/android.hardware.vulkan.level-1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version.xml \
     frameworks/native/data/etc/android.hardware.ethernet.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ethernet.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.hdmi.cec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.hdmi.cec.xml \
@@ -90,6 +101,8 @@ PRODUCT_COPY_FILES := \
     $(LOCAL_PATH)/fstab.rpi4:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rpi4 \
     $(LOCAL_PATH)/fstab.rpi4:$(TARGET_COPY_OUT_RAMDISK)/fstab.rpi4 \
     $(LOCAL_PATH)/Generic.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Generic.kl \
+    $(LOCAL_PATH)/firmware/powervr/rogue_4.40.2.51_v1.fw:root/lib/firmware/powervr/rogue_4.40.2.51_v1.fw \
+    $(LOCAL_PATH)/firmware/powervr/rogue_4.40.2.51_v1.fw:$(TARGET_COPY_OUT_RAMDISK)/lib/firmware/powervr/rogue_4.40.2.51_v1.fw \
     $(PRODUCT_COPY_FILES)
 
 # media configurations

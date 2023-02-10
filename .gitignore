@@ -1,0 +1,6 @@
+/boot/Image.lz4
+/boot/mt8173-elm-hana.dtb
+/boot/ramdisk.img
+/boot/kernel.itb
+/boot/vmlinux.kpart
+

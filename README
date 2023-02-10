@@ -17,27 +17,34 @@
 
 # Prepare sd card
  Partitions of the card should be set-up like followings.
-  p1  128MB for boot : Do fdisk, set W95 FAT32(LBA) & Bootable type, mkfs.vfat
+  p1  32MB for boot : Do cgpt
   p2 1024MB for /system : Do fdisk, new primary partition
   p3  128MB for /vendor : Do fdisk, new primary partition
   p4 remainings for /data : Do fdisk, mkfs.ext4
  Set volume label of /data partition as userdata
   : use -L option for mkfs.ext4
- 
-# Write system & vendor partition
-  $ cd out/target/product/rpi4
-  $ sudo dd if=system.img of=/dev/<p2> bs=1M
-  $ sudo dd if=vendor.img of=/dev/<p3> bs=1M
 
-# Copy firmware & ramdisk to boot partition
-  device/arpi/rpi4/boot/* to p1:/
-  out/target/product/rpi4/ramdisk.img to p1:/
+ $ sudo cgpt create /dev/<block>
+ $ sudo cgpt add -i 1 -t kernel -b 8192 -s 65536 -l Kernel -S 1 -T 5 -P 10 /dev/<block>
+
+ fdisk & mkfs.ext4 for p2,p3,p4
 
 
 # Download & Build kernel source
   https://github.com/android-rpi/kernel_manifest
 
-# Copy kernel binaries to boot partition
-  <kernel directory>/out/arpi-5.15/dist/Image.gz to p1:/
-  <kernel directory>/out/arpi-5.15/dist/bcm2711-rpi-*.dtb to p1:/
-  <kernel directory>/out/arpi-5.15/dist/vc4-kms-v3d-pi4.dtbo to p1:/overlays/
+# Copy kernel & ramdisk to working directory
+  <kernel directory>/out/mt-6.2/dist/Image.lz4 to device/arpi/rpi4/boot/
+  <kernel directory>/out/mt-6.2/dist/mt8173-elm-hana.dtb to device/arpi/rpi4/boot/
+  out/target/product/rpi4/ramdisk.img to device/arpi/rpi4/boot/
+
+# Generate vmlinux.kpart
+  $ cd device/arpi/rpi4/boot
+  $ mkimage -D "-I dts -O dtb -p 2048" -f auto -A arm64 -O linux -T kernel -C lz4 -a 0 -d Image.lz4 kernel.itb -i ramdisk.img -b mt8173-elm-hana.dtb
+  $ vbutil_kernel --pack vmlinux.kpart --keyblock devkeys/kernel.keyblock --signprivate devkeys/kernel_data_key.vbprivk --version 1 --config cmdline.txt --bootloader bootloader.bin --vmlinuz kernel.itb --arch arm
+
+# Write vmlinux, system & vendor partition
+  $ sudo dd if=vmlinux.kpart of=/dev/<p1> bs=4096
+  $ cd out/target/product/rpi4
+  $ sudo dd if=system.img of=/dev/<p2> bs=1M
+  $ sudo dd if=vendor.img of=/dev/<p3> bs=1M
