@@ -55,6 +55,6 @@ TARGET_USES_HWC2 := true
 TARGET_SCREEN_DENSITY := 213
 
 BOARD_SEPOLICY_DIRS := \
-    device/arpi/rpi4/sepolicy
+    device/apvr/mt8173/sepolicy
 
-DEVICE_MANIFEST_FILE := device/arpi/rpi4/manifest.xml
+DEVICE_MANIFEST_FILE := device/apvr/mt8173/manifest.xml

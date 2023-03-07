@@ -1,4 +1,4 @@
-#import /vendor/etc/init/hw/init.rpi4.usb.rc
+#import /vendor/etc/init/hw/init.mt8173.usb.rc
 
 on init
     # mount debugfs
@@ -9,7 +9,7 @@ on init
     symlink /sdcard /storage/sdcard0
 
 on fs
-    mount_all /vendor/etc/fstab.rpi4
+    mount_all /vendor/etc/fstab.mt8173
 
 on post-fs-data
     # Set indication (checked by vold) that we have finished this action

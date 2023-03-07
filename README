@@ -3,16 +3,20 @@
   $ sudo apt install libssl-dev python3-setuptools 
 
 # Download Android source
-  https://github.com/android-rpi/local_manifests
+  https://github.com/android-pvr/local_manifests
 
 # Build Android
  Refer to http://source.android.com/source/building.html
 
   $ source build/envsetup.sh
-  $ lunch rpi4-eng
+  $ lunch mt8173-eng
   $ make ramdisk systemimage vendorimage
 
  Use -j[n] option with make, if build host has a good number of CPU cores.
+
+
+# Download & Build kernel source
+  https://github.com/android-pvr/kernel_manifest
 
 
 # Prepare sd card
@@ -24,27 +28,24 @@
  Set volume label of /data partition as userdata
   : use -L option for mkfs.ext4
 
+ Make gpt by fdisk upon /dev/<block>. After that do followings for p1 :
  $ sudo cgpt create /dev/<block>
  $ sudo cgpt add -i 1 -t kernel -b 8192 -s 65536 -l Kernel -S 1 -T 5 -P 10 /dev/<block>
 
- fdisk & mkfs.ext4 for p2,p3,p4
-
-
-# Download & Build kernel source
-  https://github.com/android-rpi/kernel_manifest
+ Do more fdisk for p2, p3 & p4. And mkfs.ext4 for p4.
 
 # Copy kernel & ramdisk to working directory
-  <kernel directory>/out/mt-6.2/dist/Image.lz4 to device/arpi/rpi4/boot/
-  <kernel directory>/out/mt-6.2/dist/mt8173-elm-hana.dtb to device/arpi/rpi4/boot/
-  out/target/product/rpi4/ramdisk.img to device/arpi/rpi4/boot/
+  <kernel directory>/out/apvr-6.2/dist/Image.lz4 to device/apvr/mt8173/boot/
+  <kernel directory>/out/apvr-6.2/dist/mt8173-elm-hana.dtb to device/apvr/mt8173/boot/
+  out/target/product/mt8173/ramdisk.img to device/apvr/mt8173/boot/
 
-# Generate vmlinux.kpart
-  $ cd device/arpi/rpi4/boot
+# Generate & write vmlinux.kpart
+  At device/apvr/mt8173/boot/
   $ mkimage -D "-I dts -O dtb -p 2048" -f auto -A arm64 -O linux -T kernel -C lz4 -a 0 -d Image.lz4 kernel.itb -i ramdisk.img -b mt8173-elm-hana.dtb
   $ vbutil_kernel --pack vmlinux.kpart --keyblock devkeys/kernel.keyblock --signprivate devkeys/kernel_data_key.vbprivk --version 1 --config cmdline.txt --bootloader bootloader.bin --vmlinuz kernel.itb --arch arm
-
-# Write vmlinux, system & vendor partition
   $ sudo dd if=vmlinux.kpart of=/dev/<p1> bs=4096
-  $ cd out/target/product/rpi4
+
+# Write system & vendor partition
+  At out/target/product/mt8173/
   $ sudo dd if=system.img of=/dev/<p2> bs=1M
   $ sudo dd if=vendor.img of=/dev/<p3> bs=1M

@@ -18,11 +18,11 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit_only.mk)
 USE_OEM_TV_APP := true
 $(call inherit-product, device/google/atv/products/atv_base.mk)
 
-PRODUCT_NAME := rpi4
-PRODUCT_DEVICE := rpi4
-PRODUCT_BRAND := arpi
-PRODUCT_MANUFACTURER := ARPi
-PRODUCT_MODEL := Raspberry Pi 4
+PRODUCT_NAME := mt8173
+PRODUCT_DEVICE := mt8173
+PRODUCT_BRAND := apvr
+PRODUCT_MANUFACTURER := APVR
+PRODUCT_MODEL := MT8173
 
 include frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-heap.mk
 
@@ -45,8 +45,8 @@ PRODUCT_PACKAGES += \
 
 # system packages
 PRODUCT_PACKAGES += \
-    memtrack.rpi4 \
-    audio.primary.rpi4 \
+    memtrack.mt8173 \
+    audio.primary.mt8173 \
     audio.usb.default
 
 # graphics hal
@@ -67,9 +67,9 @@ PRODUCT_REQUIRES_INSECURE_EXECMEM_FOR_SWIFTSHADER := true
 
 # hardware/interfaces
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.allocator@2.0-service.rpi4 \
-    android.hardware.graphics.mapper@2.0-impl.rpi4 \
-    android.hardware.graphics.composer@2.1-service.rpi4 \
+    android.hardware.graphics.allocator@2.0-service.mt8173 \
+    android.hardware.graphics.mapper@2.0-impl.mt8173 \
+    android.hardware.graphics.composer@2.1-service.mt8173 \
     android.hardware.audio@4.0-impl \
     android.hardware.audio.effect@4.0-impl \
     android.hardware.audio.service \
@@ -95,11 +95,11 @@ PRODUCT_COPY_FILES := \
     frameworks/native/data/etc/android.hardware.hdmi.cec.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.hdmi.cec.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
     $(LOCAL_PATH)/init.usb.rc:root/init.usb.rc \
-    $(LOCAL_PATH)/init.rpi4.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.rpi4.rc \
-    $(LOCAL_PATH)/init.rpi4.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.rpi4.usb.rc \
+    $(LOCAL_PATH)/init.mt8173.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.mt8173.rc \
+    $(LOCAL_PATH)/init.mt8173.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.mt8173.usb.rc \
     $(LOCAL_PATH)/ueventd.rc:$(TARGET_COPY_OUT_VENDOR)/etc/ueventd.rc \
-    $(LOCAL_PATH)/fstab.rpi4:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.rpi4 \
-    $(LOCAL_PATH)/fstab.rpi4:$(TARGET_COPY_OUT_RAMDISK)/fstab.rpi4 \
+    $(LOCAL_PATH)/fstab.mt8173:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.mt8173 \
+    $(LOCAL_PATH)/fstab.mt8173:$(TARGET_COPY_OUT_RAMDISK)/fstab.mt8173 \
     $(LOCAL_PATH)/Generic.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Generic.kl \
     $(LOCAL_PATH)/firmware/powervr/rogue_4.40.2.51_v1.fw:root/lib/firmware/powervr/rogue_4.40.2.51_v1.fw \
     $(LOCAL_PATH)/firmware/powervr/rogue_4.40.2.51_v1.fw:$(TARGET_COPY_OUT_RAMDISK)/lib/firmware/powervr/rogue_4.40.2.51_v1.fw \
@@ -108,7 +108,7 @@ PRODUCT_COPY_FILES := \
 # media configurations
 PRODUCT_COPY_FILES := \
     device/generic/goldfish/camera/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
-    $(LOCAL_PATH)/etc/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+    device/generic/goldfish/camera/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
     frameworks/av/media/libeffects/data/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.conf \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
