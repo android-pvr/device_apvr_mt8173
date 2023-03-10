@@ -8,6 +8,8 @@
 
 /sys/devices/platform/gpu/uevent                    u:object_r:sysfs_gpu:s0
 /sys/devices/platform/v3dbus/fec00000.v3d/uevent    u:object_r:sysfs_gpu:s0
+/sys/devices/platform/soc/13000000.mfgsys-gpu/uevent u:object_r:sysfs_gpu:s0
+/sys/devices/platform/soc/14000000.syscon/mediatek-drm.9.auto/uevent u:object_r:sysfs_gpu:s0
 
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service.software        u:object_r:hal_gatekeeper_default_exec:s0
 
@@ -16,9 +18,10 @@
 /vendor/lib64/hw/android\.hardware\.graphics\.mapper@2\.0-impl\.mt8173\.so    u:object_r:same_process_hal_file:s0
 
 /vendor/lib64/hw/vulkan\.powervr_mesa\.so  u:object_r:same_process_hal_file:s0
-/vendor/lib64/hw/gralloc\.mt8173\.so         u:object_r:same_process_hal_file:s0
+/vendor/lib64/hw/gralloc\.mt8173\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib64/dri/libgallium_dri\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib64/libdrm\.so                   u:object_r:same_process_hal_file:s0
 /vendor/lib64/libglapi\.so                 u:object_r:same_process_hal_file:s0
+/vendor/lib64/libpowervr_rogue\.so         u:object_r:same_process_hal_file:s0
 
 /vendor/bin/hw/android\.hardware\.tv\.cec@1\.0-service\.mock  u:object_r:hal_tv_cec_mock_exec:s0
