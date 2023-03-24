@@ -41,7 +41,7 @@ PRODUCT_PACKAGES += \
 
 # overlay packages
 PRODUCT_PACKAGES += \
-    RpFrameworkOverlay
+    PvrFrameworkOverlay
 
 # system packages
 PRODUCT_PACKAGES += \
