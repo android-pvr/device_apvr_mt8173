@@ -49,3 +49,7 @@
   At out/target/product/mt8173/
   $ sudo dd if=system.img of=/dev/<p2> bs=1M
   $ sudo dd if=vendor.img of=/dev/<p3> bs=1M
+
+# Chromebook developer mode
+  https://github.com/hexdump0815/linux-mainline-on-arm-chromebooks#enabling-developer-mode
+  Ctrl-U for already switched device.
