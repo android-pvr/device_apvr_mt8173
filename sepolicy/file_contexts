@@ -13,9 +13,9 @@
 
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service.software        u:object_r:hal_gatekeeper_default_exec:s0
 
-/vendor/bin/hw/android\.hardware\.graphics\.allocator@2\.0-service\.mt8173  u:object_r:hal_graphics_allocator_default_exec:s0
-/vendor/bin/hw/android\.hardware\.graphics\.composer@2\.1-service\.mt8173   u:object_r:hal_graphics_composer_default_exec:s0
-/vendor/lib64/hw/android\.hardware\.graphics\.mapper@2\.0-impl\.mt8173\.so    u:object_r:same_process_hal_file:s0
+/vendor/bin/hw/android\.hardware\.graphics\.allocator-service\.apvr  u:object_r:hal_graphics_allocator_default_exec:s0
+/vendor/bin/hw/android\.hardware\.graphics\.composer-service\.apvr   u:object_r:hal_graphics_composer_default_exec:s0
+/vendor/lib64/hw/android\.hardware\.graphics\.mapper@4\.0-impl\.apvr\.so    u:object_r:same_process_hal_file:s0
 
 /vendor/lib64/hw/vulkan\.pastel\.so        u:object_r:same_process_hal_file:s0
 

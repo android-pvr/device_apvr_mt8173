@@ -67,9 +67,9 @@ PRODUCT_REQUIRES_INSECURE_EXECMEM_FOR_SWIFTSHADER := true
 
 # hardware/interfaces
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.allocator@2.0-service.mt8173 \
-    android.hardware.graphics.mapper@2.0-impl.mt8173 \
-    android.hardware.graphics.composer@2.1-service.mt8173 \
+    android.hardware.graphics.allocator-service.apvr \
+    android.hardware.graphics.mapper@4.0-impl.apvr \
+    android.hardware.graphics.composer-service.apvr \
     android.hardware.audio@4.0-impl \
     android.hardware.audio.effect@4.0-impl \
     android.hardware.audio.service \
