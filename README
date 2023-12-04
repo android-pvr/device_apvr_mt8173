@@ -22,7 +22,7 @@
 # Prepare sd card
  Partitions of the card should be set-up like followings.
   p1  32MB for boot : Do cgpt
-  p2 1024MB for /system : Do fdisk, new primary partition
+  p2 1152MB for /system : Do fdisk, new primary partition
   p3  128MB for /vendor : Do fdisk, new primary partition
   p4 remainings for /data : Do fdisk, mkfs.ext4
  Set volume label of /data partition as userdata
@@ -35,8 +35,8 @@
  Do more fdisk for p2, p3 & p4. And mkfs.ext4 for p4.
 
 # Copy kernel & ramdisk to working directory
-  <kernel directory>/out/apvr-6.2/dist/Image.lz4 to device/apvr/mt8173/boot/
-  <kernel directory>/out/apvr-6.2/dist/mt8173-elm-hana.dtb to device/apvr/mt8173/boot/
+  <kernel directory>/out/apvr-6.5/dist/Image.lz4 to device/apvr/mt8173/boot/
+  <kernel directory>/out/apvr-6.5/dist/mt8173-elm-hana.dtb to device/apvr/mt8173/boot/
   out/target/product/mt8173/ramdisk.img to device/apvr/mt8173/boot/
 
 # Generate & write vmlinux.kpart
